@@ -10,6 +10,8 @@ int main(void)
     printf("4 / 2: %d\n", klib_div(4, 2));
     printf("Absoulute value of -5: %d\n", klib_abs(5));
     printf("Squareroot of 9: %.2f\n", klib_sqrt(9));
+    printf("Bigger value of 10 and 9: %d\n", klib_max(10, 9));
+    printf("Smaller alue of 10 and 9: %d\n", klib_min(10, 9));
 
     return 0;
 }

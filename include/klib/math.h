@@ -10,5 +10,8 @@ int klib_div(int num1, int num2);
 int klib_abs(int num);
 // Squareroot
 double klib_sqrt(int num);
+// bigger and smaller value
+int klib_max(int num1, int num2);
+int klib_min(int num1, int num2);
 
 #endif

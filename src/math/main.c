@@ -72,3 +72,27 @@ double klib_sqrt(int num)
 
     return guess;
 }
+
+// returns the bigger number of two numbers
+int klib_max(int num1, int num2)
+{
+    if (num1 > num2)
+    {
+        return num1;
+    } else
+    {
+        return num2;
+    }
+}
+
+// returns the smaller number of two numbers
+int klib_min(int num1, int num2)
+{
+    if (num1 < num2)
+    {
+        return num1;
+    } else
+    {
+        return num2;
+    }
+}
