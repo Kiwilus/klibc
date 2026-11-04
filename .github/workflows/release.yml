@@ -1,0 +1,52 @@
+name: Build and Release (Linux)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential
+
+      - name: Build library
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+
+      - name: Prepare release artifacts
+        run: |
+          mkdir -p release
+          cp -a build/libklib.so* release/
+
+          mkdir -p release/include
+          cp -r include/klib release/include/
+
+          cp LICENSE README.md release/ 2>/dev/null || true
+
+          cd release
+          tar -czf ../klibc-linux-x86_64.tar.gz *
+          cd ..
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            klibc-linux-x86_64.tar.gz
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
