@@ -1,14 +1,20 @@
-# library first
-echo "building the library..."
+#!/bin/bash
+
+set -e
+
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+echo -e "${BLUE}> Building the library...${NC}"
 cmake -S . -B build
 cmake --build build
-echo "success building library"
+echo -e "${GREEN}Library built successfully.${NC}"
 
-# then test file
-echo "building the test file..."
+echo -e "\n${BLUE}> Building the test file...${NC}"
 cmake -S tests -B tests/build
 cmake --build tests/build
-echo "success building testfile"
-echo "executing testfile with ./tests/build/main"
+echo -e "${GREEN}Test file built successfully.${NC}"
 
-./tests/build/klib_test
+echo -e "\n${BLUE}> Executing test file...${NC}"
+./tests/build/main
